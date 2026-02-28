@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadsReviver — Design System Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Heebo:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --brand-900:#0D1B5C; --brand-800:#152070; --brand-700:#1A2B8A;
+  --brand-600:#1E3A8A; --brand-500:#2563EB; --brand-400:#3B82F6;
+  --brand-300:#60A5FA; --brand-200:#93C5FD; --brand-100:#DBEAFE;
+  --brand-50:#EFF6FF;
+  --n-900:#111827; --n-700:#374151; --n-600:#4B5563; --n-500:#6B7280;
+  --n-400:#9CA3AF; --n-300:#D1D5DB; --n-200:#E5E7EB; --n-100:#F3F4F6;
+  --n-50:#F9FAFB;
+  --success:#10B981; --warning:#F59E0B; --error:#EF4444; --info:#06B6D4;
+  --font-d:'Syne','Heebo',sans-serif;
+  --font-b:'Plus Jakarta Sans','Heebo',sans-serif;
+  --font-m:'JetBrains Mono',monospace;
+  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px;
+  --r-2xl:24px; --r-full:9999px;
+  --sh-card:0 2px 8px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
+  --sh-card-hover:0 8px 24px rgba(0,0,0,.10),0 4px 8px rgba(0,0,0,.06);
+  --sh-brand:0 4px 14px rgba(37,99,235,.35);
+  --sh-brand-hover:0 8px 20px rgba(37,99,235,.45);
+  --gradient-hero: radial-gradient(ellipse at 20% 50%,rgba(37,99,235,.3) 0,transparent 60%),
+    radial-gradient(ellipse at 80% 20%,rgba(96,165,250,.2) 0,transparent 50%),
+    linear-gradient(135deg,#0D1B5C 0%,#152070 60%,#1A2B8A 100%);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-b);
+  background:var(--n-50);
+  color:var(--n-900);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.ds-nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--n-200);
+  box-shadow:0 1px 0 rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+}
+.ds-nav-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:68px;
+}
+.ds-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-d);font-weight:800;font-size:18px;
+  color:var(--n-900);text-decoration:none;
+}
+.ds-logo-mark{
+  width:34px;height:34px;
+  background:var(--gradient-hero);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:16px;font-weight:800;
+  box-shadow:var(--sh-brand);
+}
+.ds-nav-links{display:flex;gap:4px}
+.ds-nav-link{
+  font-size:14px;font-weight:500;color:var(--n-600);
+  text-decoration:none;padding:6px 12px;border-radius:8px;
+  transition:color .15s,background .15s;
+}
+.ds-nav-link:hover,.ds-nav-link.active{color:var(--brand-500);background:var(--brand-50)}
+
+.ds-wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.ds-section{padding:72px 0 48px}
+.ds-section+.ds-section{border-top:1px solid var(--n-200)}
+
+.ds-section-label{
+  font-size:11px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brand-400);margin-bottom:8px;
+}
+.ds-section-title{
+  font-family:var(--font-d);font-size:2rem;font-weight:800;
+  color:var(--n-900);line-height:1.15;margin-bottom:12px;
+}
+.ds-section-desc{
+  font-size:16px;color:var(--n-600);max-width:560px;line-height:1.6;
+  margin-bottom:48px;
+}
+.ds-grid{display:grid;gap:24px}
+.ds-grid-2{grid-template-columns:repeat(2,1fr)}
+.ds-grid-3{grid-template-columns:repeat(3,1fr)}
+.ds-grid-4{grid-template-columns:repeat(4,1fr)}
+.ds-grid-auto{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.ds-flex{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ds-row{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+
+/* ─── COLOR SWATCHES ─────────────────────────────────────── */
+.swatch{
+  border-radius:var(--r-xl);overflow:hidden;
+  box-shadow:var(--sh-card);
+}
+.swatch-color{height:80px}
+.swatch-info{
+  background:white;padding:12px;
+  font-size:12px;color:var(--n-600);
+}
+.swatch-info strong{
+  display:block;font-size:13px;font-weight:700;
+  color:var(--n-900);margin-bottom:2px;
+}
+
+/* ─── TYPE SPECIMENS ──────────────────────────────────────── */
+.type-sample{
+  background:white;border-radius:var(--r-xl);
+  padding:28px;box-shadow:var(--sh-card);
+  display:flex;flex-direction:column;gap:4px;
+}
+.type-meta{font-size:11px;color:var(--n-400);font-family:var(--font-m);margin-top:4px}
+
+/* ─── BUTTONS ────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-b);font-weight:600;cursor:pointer;
+  border:none;text-decoration:none;white-space:nowrap;
+  transition:all .2s cubic-bezier(0,0,.2,1);
+  border-radius:var(--r-lg);
+}
+.btn-primary{
+  background:var(--brand-500);color:white;
+  box-shadow:var(--sh-brand);
+}
+.btn-primary:hover{background:var(--brand-400);box-shadow:var(--sh-brand-hover);transform:translateY(-1px)}
+.btn-secondary{
+  background:transparent;color:var(--brand-500);
+  border:1.5px solid var(--brand-200);
+}
+.btn-secondary:hover{background:var(--brand-50);border-color:var(--brand-400)}
+.btn-ghost{background:transparent;color:var(--n-600);border:none}
+.btn-ghost:hover{color:var(--brand-500);background:var(--brand-50)}
+.btn-danger{background:var(--error);color:white;box-shadow:0 4px 14px rgba(239,68,68,.3)}
+.btn-danger:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-sm{padding:7px 14px;font-size:13px;height:32px}
+.btn-md{padding:9px 20px;font-size:14px;height:40px}
+.btn-lg{padding:11px 24px;font-size:16px;height:48px}
+.btn-xl{padding:13px 32px;font-size:18px;height:56px}
+
+/* ─── CARDS ──────────────────────────────────────────────── */
+.card{
+  background:white;border-radius:var(--r-xl);
+  border:1px solid var(--n-200);
+  box-shadow:var(--sh-card);
+  transition:box-shadow .3s cubic-bezier(0,0,.2,1),transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.card:hover{box-shadow:var(--sh-card-hover);transform:translateY(-3px)}
+.card-body{padding:32px}
+.card-sm .card-body{padding:20px 24px}
+
+.feature-card{padding:32px;text-align:center}
+.feature-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:var(--brand-100);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+  font-size:24px;
+}
+.feature-title{
+  font-family:var(--font-d);font-size:18px;font-weight:700;
+  color:var(--n-900);margin-bottom:10px;
+}
+.feature-desc{font-size:14px;color:var(--n-600);line-height:1.65;margin-bottom:20px}
+.feature-link{
+  font-size:13px;font-weight:600;color:var(--brand-500);
+  display:inline-flex;align-items:center;gap:5px;text-decoration:none;
+}
+.feature-link:hover{color:var(--brand-400)}
+
+.stat-card{padding:28px}
+.stat-number{
+  font-family:var(--font-d);font-size:2.5rem;font-weight:800;
+  color:var(--n-900);line-height:1;margin-bottom:6px;
+}
+.stat-label{font-size:13px;color:var(--n-500);margin-bottom:8px}
+.stat-trend{font-size:12px;font-weight:600}
+.stat-trend.up{color:var(--success)}
+.stat-trend.down{color:var(--error)}
+
+.lead-card{
+  border:1px solid var(--n-200);
+  border-inline-start:3px solid var(--brand-500);
+  border-radius:var(--r-lg);
+  padding:16px 20px;background:white;
+  display:flex;align-items:center;gap:16px;
+  box-shadow:var(--sh-card);
+  transition:background .15s,box-shadow .2s;
+}
+.lead-card:hover{background:var(--brand-50);box-shadow:var(--sh-card-hover)}
+.lead-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--brand-100);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:var(--brand-600);flex-shrink:0;
+}
+.lead-info{flex:1;min-width:0}
+.lead-name{font-weight:600;font-size:14px;color:var(--n-900)}
+.lead-meta{font-size:12px;color:var(--n-500);margin-top:2px}
+.lead-actions{display:flex;align-items:center;gap:8px}
+
+/* ─── BADGES ─────────────────────────────────────────────── */
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 10px;border-radius:var(--r-full);
+  font-size:11px;font-weight:700;
+}
+.badge-default{background:var(--n-100);color:var(--n-700)}
+.badge-brand{background:var(--brand-100);color:var(--brand-700)}
+.badge-success{background:#D1FAE5;color:#065F46}
+.badge-warning{background:#FEF3C7;color:#92400E}
+.badge-error{background:#FEE2E2;color:#991B1B}
+.badge-info{background:#CFFAFE;color:#164E63}
+.badge-outline{background:transparent;color:var(--n-700);border:1px solid var(--n-300)}
+
+/* ─── FORMS ──────────────────────────────────────────────── */
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-label{font-size:13px;font-weight:600;color:var(--n-700)}
+.form-input{
+  height:44px;padding:0 16px;
+  border:1.5px solid var(--n-300);
+  border-radius:var(--r-lg);
+  font-family:var(--font-b);font-size:14px;color:var(--n-900);
+  background:white;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+  width:100%;
+}
+.form-input::placeholder{color:var(--n-400)}
+.form-input:hover{border-color:var(--n-400)}
+.form-input:focus{
+  border-color:var(--brand-500);
+  box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+.form-input.error{
+  border-color:var(--error);
+  box-shadow:0 0 0 3px rgba(239,68,68,.12);
+}
+.form-helper{font-size:12px;color:var(--n-500)}
+.form-error{font-size:12px;color:var(--error)}
+
+/* ─── PROGRESS ───────────────────────────────────────────── */
+.progress-track{
+  background:var(--n-100);height:8px;border-radius:var(--r-full);
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;border-radius:var(--r-full);
+  background:linear-gradient(90deg,var(--brand-500),var(--brand-400));
+  animation:progress-in .8s cubic-bezier(0,0,.2,1) both;
+  transform-origin:left center;
+}
+@keyframes progress-in{from{width:0!important}to{}}
+
+/* ─── TOGGLE ─────────────────────────────────────────────── */
+.toggle{
+  position:relative;width:44px;height:24px;
+  background:var(--n-300);border-radius:var(--r-full);
+  cursor:pointer;transition:background .2s;border:none;
+}
+.toggle.on{background:var(--brand-500)}
+.toggle-thumb{
+  position:absolute;top:2px;left:2px;
+  width:20px;height:20px;border-radius:50%;background:white;
+  box-shadow:0 1px 3px rgba(0,0,0,.15);
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.toggle.on .toggle-thumb{transform:translateX(20px)}
+
+/* ─── TABLE ──────────────────────────────────────────────── */
+.ds-table{width:100%;border-collapse:collapse;font-size:13px}
+.ds-table th{
+  background:var(--n-50);padding:10px 16px;text-align:start;
+  font-size:11px;font-weight:700;color:var(--n-500);
+  letter-spacing:.04em;text-transform:uppercase;
+  border-bottom:1px solid var(--n-200);
+}
+.ds-table td{
+  padding:14px 16px;border-bottom:1px solid var(--n-100);
+  color:var(--n-700);
+}
+.ds-table tr:hover td{background:var(--brand-50)}
+.ds-table tr:last-child td{border-bottom:none}
+.ds-table-wrap{background:white;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-card)}
+
+/* ─── SHADOW DEMO ────────────────────────────────────────── */
+.shadow-demo{
+  background:white;border-radius:var(--r-xl);
+  padding:24px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  text-align:center;
+}
+.shadow-demo span{font-size:11px;color:var(--n-500);font-family:var(--font-m)}
+
+/* ─── HERO SECTION ───────────────────────────────────────── */
+.hero-demo{
+  border-radius:var(--r-2xl);overflow:hidden;
+  background:var(--gradient-hero);
+  padding:72px 64px;
+  position:relative;
+}
+.hero-demo::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-overline{
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brand-300);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.hero-overline::before{
+  content:'';display:inline-block;
+  width:24px;height:1.5px;background:var(--brand-300);
+}
+.hero-headline{
+  font-family:var(--font-d);font-size:clamp(2.2rem,5vw,4rem);font-weight:800;
+  color:white;line-height:1.1;letter-spacing:-.03em;
+  margin-bottom:20px;max-width:720px;
+}
+.hero-sub{
+  font-size:18px;color:rgba(255,255,255,.72);
+  line-height:1.6;max-width:520px;margin-bottom:40px;
+}
+.hero-cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:48px}
+.btn-hero-primary{
+  background:white;color:var(--brand-700);font-weight:700;
+  padding:13px 28px;font-size:15px;border-radius:var(--r-lg);
+  box-shadow:0 4px 20px rgba(0,0,0,.25);border:none;cursor:pointer;
+  transition:all .2s;
+}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.btn-hero-ghost{
+  color:rgba(255,255,255,.85);font-weight:600;font-size:15px;
+  padding:13px 24px;border-radius:var(--r-lg);
+  border:1.5px solid rgba(255,255,255,.25);background:transparent;cursor:pointer;
+  transition:all .2s;
+}
+.btn-hero-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+.hero-social{
+  display:flex;gap:32px;align-items:center;
+  padding-top:32px;border-top:1px solid rgba(255,255,255,.12);
+}
+.social-item{text-align:center}
+.social-number{
+  font-family:var(--font-d);font-size:24px;font-weight:800;
+  color:white;line-height:1;
+}
+.social-label{font-size:12px;color:rgba(255,255,255,.55);margin-top:3px}
+
+/* ─── RTL DEMO ───────────────────────────────────────────── */
+.rtl-demo{
+  background:var(--gradient-hero);
+  border-radius:var(--r-2xl);padding:40px;color:white;
+}
+[dir="rtl"] .rtl-inner{font-family:'Heebo',sans-serif}
+.rtl-badge{
+  display:inline-block;padding:4px 14px;
+  background:rgba(255,255,255,.12);
+  border-radius:var(--r-full);
+  font-size:12px;font-weight:600;color:var(--brand-200);
+  margin-bottom:16px;
+}
+.rtl-headline{
+  font-size:2rem;font-weight:800;line-height:1.2;
+  margin-bottom:12px;
+}
+.rtl-sub{
+  font-size:15px;color:rgba(255,255,255,.7);
+  line-height:1.7;margin-bottom:24px;max-width:480px;
+}
+.rtl-form-row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.rtl-input{
+  height:44px;padding:0 16px;border:1.5px solid rgba(255,255,255,.2);
+  border-radius:var(--r-lg);background:rgba(255,255,255,.08);
+  color:white;font-family:'Heebo',sans-serif;font-size:14px;
+  outline:none;flex:1;min-width:180px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.rtl-input::placeholder{color:rgba(255,255,255,.4)}
+.rtl-input:focus{border-color:var(--brand-300);box-shadow:0 0 0 3px rgba(96,165,250,.2)}
+.btn-rtl{
+  background:white;color:var(--brand-700);font-weight:700;
+  padding:10px 22px;border-radius:var(--r-lg);border:none;cursor:pointer;
+  font-family:'Heebo',sans-serif;font-size:14px;white-space:nowrap;
+  transition:all .2s;box-shadow:0 4px 14px rgba(0,0,0,.2);
+}
+.btn-rtl:hover{transform:translateY(-1px)}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────── */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.fade-in{animation:fadeInUp .6s cubic-bezier(0,0,.2,1) both}
+.d-100{animation-delay:.1s}
+.d-200{animation-delay:.2s}
+.d-300{animation-delay:.3s}
+.d-400{animation-delay:.4s}
+.d-500{animation-delay:.5s}
+
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.live-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--success);
+  display:inline-block;
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+
+/* ─── MISC ───────────────────────────────────────────────── */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:var(--r-full);
+  background:var(--brand-50);border:1px solid var(--brand-100);
+  font-size:12px;font-weight:600;color:var(--brand-700);
+}
+code{
+  font-family:var(--font-m);font-size:12px;
+  background:var(--n-100);padding:2px 6px;border-radius:4px;
+  color:var(--brand-700);
+}
+.divider{height:1px;background:var(--n-200);margin:32px 0}
+.text-muted{color:var(--n-500)}
+.text-brand{color:var(--brand-500)}
+.font-display{font-family:var(--font-d)}
+
+@media(max-width:768px){
+  .ds-grid-3,.ds-grid-4{grid-template-columns:1fr}
+  .ds-grid-2{grid-template-columns:1fr}
+  .ds-wrap{padding:0 16px}
+  .hero-demo{padding:40px 24px}
+  .hero-headline{font-size:2rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────────────── -->
+<nav class="ds-nav">
+  <div class="ds-nav-inner">
+    <a href="#" class="ds-logo">
+      <div class="ds-logo-mark">LR</div>
+      LeadsReviver
+    </a>
+    <div class="ds-nav-links">
+      <a href="#colors" class="ds-nav-link">Colors</a>
+      <a href="#typography" class="ds-nav-link">Type</a>
+      <a href="#buttons" class="ds-nav-link">Buttons</a>
+      <a href="#cards" class="ds-nav-link">Cards</a>
+      <a href="#forms" class="ds-nav-link">Forms</a>
+      <a href="#data" class="ds-nav-link">Data</a>
+      <a href="#hebrew" class="ds-nav-link">עברית</a>
+    </div>
+    <a href="#" class="btn btn-primary btn-md">Get Started</a>
+  </div>
+</nav>
+
+<!-- ─── HEADER ───────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" style="padding-bottom:0">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <span class="live-dot"></span>
+      <span style="font-size:12px;font-weight:600;color:var(--n-500)">DESIGN SYSTEM</span>
+    </div>
+    <h1 class="font-display" style="font-size:clamp(2rem,4vw,3.5rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:16px">
+      LeadsReviver<br>
+      <span class="text-brand">Design System</span>
+    </h1>
+    <p style="font-size:17px;color:var(--n-600);max-width:600px;line-height:1.6;margin-bottom:32px">
+      Complete visual language for the LeadsReviver platform — built on WW A.I Solutions brand standards.
+      Supports English (LTR) and Hebrew (RTL) with full bidirectional design.
+    </p>
+    <div class="ds-flex" style="margin-bottom:48px">
+      <span class="chip">Next.js + Tailwind CSS</span>
+      <span class="chip">Syne + Plus Jakarta Sans</span>
+      <span class="chip">Heebo (Hebrew)</span>
+      <span class="chip">WCAG AA</span>
+      <span class="chip">RTL Ready</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HERO PREVIEW ──────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" id="hero">
+    <div class="ds-section-label">Hero Section</div>
+    <h2 class="ds-section-title font-display">Hero Pattern</h2>
+    <p class="ds-section-desc">Dark navy hero with mesh gradient — the brand's signature surface for landing and campaign pages.</p>
+
+    <div class="hero-demo fade-in">
+      <div class="hero-overline">Lead Intelligence Platform</div>
+      <div class="hero-headline">Transform Dead Leads<br>Into Revenue.</div>
+      <div class="hero-sub">AI re-engages cold prospects automatically — so your team focuses only on buyers who are ready.</div>
+      <div class="hero-cta-row">
+        <button class="btn-hero-primary">Start Free Trial</button>
+        <button class="btn-hero-ghost">Watch Demo →</button>
+      </div>
+      <div class="hero-social">
+        <div class="social-item">
+          <div class="social-number">1,200+</div>
+          <div class="social-label">Companies</div>
+        </div>
+        <div class="social-item">
+          <div class="social-number">82%</div>
+          <div class="social-label">Re-engagement rate</div>
+        </div>
+        <div class="social-item">
+          <div class="social-number">4.9★</div>
+          <div class="social-label">Average rating</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── COLORS ────────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" id="colors">
+    <div class="ds-section-label">Foundation</div>
+    <h2 class="ds-section-title font-display">Color Palette</h2>
+    <p class="ds-section-desc">Deep navy to electric blue — the brand's signature spectrum. Built for trust, authority, and clear hierarchy.</p>
+
+    <div class="ds-grid ds-grid-auto" style="margin-bottom:32px">
+      <div class="swatch fade-in">
+        <div class="swatch-color" style="background:#0D1B5C"></div>
+        <div class="swatch-info"><strong>Brand 900</strong>#0D1B5C · Hero BG</div>
+      </div>
+      <div class="swatch fade-in d-100">
+        <div class="swatch-color" style="background:#152070"></div>
+        <div class="swatch-info"><strong>Brand 800</strong>#152070 · Dark Surface</div>
+      </div>
+      <div class="swatch fade-in d-200">
+        <div class="swatch-color" style="background:#1A2B8A"></div>
+        <div class="swatch-info"><strong>Brand 700</strong>#1A2B8A · Rich Navy</div>
+      </div>
+      <div class="swatch fade-in d-300">
+        <div class="swatch-color" style="background:#2563EB"></div>
+        <div class="swatch-info"><strong>Brand 500</strong>#2563EB · Primary</div>
+      </div>
+      <div class="swatch fade-in d-400">
+        <div class="swatch-color" style="background:#3B82F6"></div>
+        <div class="swatch-info"><strong>Brand 400</strong>#3B82F6 · Hover</div>
+      </div>
+      <div class="swatch fade-in d-500">
+        <div class="swatch-color" style="background:#60A5FA"></div>
+        <div class="swatch-info"><strong>Brand 300</strong>#60A5FA · Icon/Highlight</div>
+      </div>
+      <div class="swatch fade-in d-100">
+        <div class="swatch-color" style="background:#93C5FD"></div>
+        <div class="swatch-info"><strong>Brand 200</strong>#93C5FD · Border/Tint</div>
+      </div>
+      <div class="swatch fade-in d-200">
+        <div class="swatch-color" style="background:#DBEAFE"></div>
+        <div class="swatch-info"><strong>Brand 100</strong>#DBEAFE · Chip BG</div>
+      </div>
+    </div>
+
+    <!-- Neutral scale -->
+    <h3 class="font-display" style="font-size:16px;font-weight:700;color:var(--n-700);margin-bottom:16px">Neutral Scale</h3>
+    <div style="display:flex;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-card);margin-bottom:32px">
+      <div style="flex:1;height:48px;background:#111827"></div>
+      <div style="flex:1;height:48px;background:#374151"></div>
+      <div style="flex:1;height:48px;background:#4B5563"></div>
+      <div style="flex:1;height:48px;background:#6B7280"></div>
+      <div style="flex:1;height:48px;background:#9CA3AF"></div>
+      <div style="flex:1;height:48px;background:#D1D5DB"></div>
+      <div style="flex:1;height:48px;background:#E5E7EB"></div>
+      <div style="flex:1;height:48px;background:#F3F4F6"></div>
+      <div style="flex:1;height:48px;background:#F9FAFB"></div>
+    </div>
+
+    <!-- Status colors -->
+    <h3 class="font-display" style="font-size:16px;font-weight:700;color:var(--n-700);margin-bottom:16px">Status Colors</h3>
+    <div class="ds-grid ds-grid-4">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#10B981"></div>
+        <div class="swatch-info"><strong>Success</strong>#10B981</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F59E0B"></div>
+        <div class="swatch-info"><strong>Warning</strong>#F59E0B</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#EF4444"></div>
+        <div class="swatch-info"><strong>Error</strong>#EF4444</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#06B6D4"></div>
+        <div class="swatch-info"><strong>Info</strong>#06B6D4</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TYPOGRAPHY ────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" id="typography">
+    <div class="ds-section-label">Foundation</div>
+    <h2 class="ds-section-title font-display">Typography</h2>
+    <p class="ds-section-desc">Syne (display) paired with Plus Jakarta Sans (body). For Hebrew: Heebo handles both roles with equal distinction.</p>
+
+    <div class="ds-grid" style="gap:16px">
+      <div class="type-sample">
+        <div style="font-family:var(--font-d);font-size:clamp(2rem,5vw,4rem);font-weight:800;color:var(--n-900);letter-spacing:-.04em;line-height:1.05">Transform Dead Leads Into Revenue</div>
+        <div class="type-meta">Syne · 800 · Hero · letter-spacing: -0.04em</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-family:var(--font-d);font-size:2.25rem;font-weight:700;color:var(--n-900);letter-spacing:-.025em;line-height:1.2">AI-Powered Lead Revival Platform</div>
+        <div class="type-meta">Syne · 700 · H2 · 36px · letter-spacing: -0.025em</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-family:var(--font-d);font-size:1.5rem;font-weight:600;color:var(--n-900);line-height:1.35">Re-engage Your Coldest Prospects</div>
+        <div class="type-meta">Syne · 600 · H3 · 24px</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:18px;color:var(--n-600);line-height:1.65;max-width:640px">
+          LeadsReviver uses advanced AI to identify, score, and automatically re-engage leads that have gone cold —
+          converting missed opportunities into revenue without any manual effort from your team.
+        </div>
+        <div class="type-meta">Plus Jakarta Sans · 400 · Body Large · 18px</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:14px;color:var(--n-600);line-height:1.6">
+          Our platform monitors lead engagement signals, runs personalized AI-generated sequences, and hands off warm leads to your sales team exactly when they're ready to convert.
+        </div>
+        <div class="type-meta">Plus Jakarta Sans · 400 · Body · 14px</div>
+      </div>
+      <div class="type-sample">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-500)">Lead Intelligence Platform</div>
+        <div class="type-meta">Overline · 11px · 700 · tracking: 0.12em · UPPERCASE</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3 class="font-display" style="font-size:16px;font-weight:700;margin-bottom:16px">Hebrew / Heebo</h3>
+    <div class="type-sample">
+      <div style="font-family:'Heebo',sans-serif;font-size:2.5rem;font-weight:800;color:var(--n-900);line-height:1.2;direction:rtl;text-align:right;letter-spacing:0">
+        הפוך לידים קפואים להכנסות
+      </div>
+      <div class="type-meta">Heebo · 800 · Display · RTL</div>
+    </div>
+    <div class="type-sample" style="margin-top:16px">
+      <div style="font-family:'Heebo',sans-serif;font-size:16px;color:var(--n-600);line-height:1.75;direction:rtl;text-align:right">
+        בינה מלאכותית מחדשת קשר עם לקוחות פוטנציאליים באופן אוטומטי —
+        כך שהצוות שלך מתמקד רק בקונים שמוכנים לסגור עסקה.
+      </div>
+      <div class="type-meta">Heebo · 400 · Body · RTL · line-height: 1.75</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── BUTTONS ────────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" id="buttons">
+    <div class="ds-section-label">Components</div>
+    <h2 class="ds-section-title font-display">Buttons</h2>
+    <p class="ds-section-desc">Four variants × four sizes. Every button includes hover, active, focus, and disabled states.</p>
+
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <!-- Variants -->
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">Variants</div>
+        <div class="ds-flex">
+          <button class="btn btn-primary btn-lg">Primary Button</button>
+          <button class="btn btn-secondary btn-lg">Secondary Button</button>
+          <button class="btn btn-ghost btn-lg">Ghost Button</button>
+          <button class="btn btn-danger btn-lg">Danger Button</button>
+        </div>
+      </div>
+      <!-- Sizes -->
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">Sizes</div>
+        <div class="ds-flex" style="align-items:center">
+          <button class="btn btn-primary btn-xl">Extra Large</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+          <button class="btn btn-primary btn-md">Medium</button>
+          <button class="btn btn-primary btn-sm">Small</button>
+        </div>
+      </div>
+      <!-- Disabled -->
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">Disabled State</div>
+        <div class="ds-flex">
+          <button class="btn btn-primary btn-lg" disabled style="opacity:.4;cursor:not-allowed">Primary Disabled</button>
+          <button class="btn btn-secondary btn-lg" disabled style="opacity:.4;cursor:not-allowed">Secondary Disabled</button>
+        </div>
+      </div>
+      <!-- With icons -->
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">With Icons</div>
+        <div class="ds-flex">
+          <button class="btn btn-primary btn-lg">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Start Reviving
+          </button>
+          <button class="btn btn-secondary btn-lg">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 15l5-3-5-3v6z"/></svg>
+            Watch Demo
+          </button>
+          <button class="btn btn-ghost btn-lg">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            Export
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CARDS ──────────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" id="cards">
+    <div class="ds-section-label">Components</div>
+    <h2 class="ds-section-title font-display">Cards</h2>
+    <p class="ds-section-desc">Service cards, stat cards, and lead record cards — each optimized for their data context.</p>
+
+    <!-- Stat Cards -->
+    <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">Stat / KPI Cards</div>
+    <div class="ds-grid ds-grid-4" style="margin-bottom:40px">
+      <div class="card stat-card fade-in">
+        <div class="stat-number">1,247</div>
+        <div class="stat-label">Active Leads</div>
+        <div class="stat-trend up">↑ 12% this week</div>
+      </div>
+      <div class="card stat-card fade-in d-100">
+        <div class="stat-number">82%</div>
+        <div class="stat-label">Re-engagement Rate</div>
+        <div class="stat-trend up">↑ 4.1% vs last month</div>
+      </div>
+      <div class="card stat-card fade-in d-200">
+        <div class="stat-number">$47K</div>
+        <div class="stat-label">Pipeline Recovered</div>
+        <div class="stat-trend up">↑ 31% this quarter</div>
+      </div>
+      <div class="card stat-card fade-in d-300">
+        <div class="stat-number">34</div>
+        <div class="stat-label">Sequences Running</div>
+        <div class="stat-trend down">↓ 2 paused</div>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">Service / Feature Cards</div>
+    <div class="ds-grid ds-grid-3" style="margin-bottom:40px">
+      <div class="card fade-in">
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-title">AI Agents</div>
+          <div class="feature-desc">Autonomous agents that monitor lead signals, craft personalized messages, and execute re-engagement sequences without human intervention.</div>
+          <a href="#" class="feature-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="card fade-in d-200">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Lead Scoring</div>
+          <div class="feature-desc">Proprietary AI model scores every lead on readiness-to-buy, engagement history, and behavioral signals in real time.</div>
+          <a href="#" class="feature-link">See Scoring →</a>
+        </div>
+      </div>
+      <div class="card fade-in d-400">
+        <div class="feature-card">
+          <div class="feature-icon">🎙️</div>
+          <div class="feature-title">Voice AI</div>
+          <div class="feature-desc">AI-powered voice calls that qualify leads, book appointments, and collect data — operating 24/7 with zero missed calls.</div>
+          <a href="#" class="feature-link">Try Voice AI →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lead Cards -->
+    <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">Lead Record Cards</div>
+    <div class="ds-grid" style="gap:10px;max-width:720px">
+      <div class="lead-card" style="border-inline-start-color:var(--error)">
+        <div class="lead-avatar" style="background:#FEE2E2;color:#991B1B">JS</div>
+        <div class="lead-info">
+          <div class="lead-name">John Smith <span class="badge badge-error" style="margin-inline-start:6px">🔥 Hot</span></div>
+          <div class="lead-meta">john@acmecorp.com · Acme Corp · Last contact: 2 days ago</div>
+        </div>
+        <div class="lead-actions">
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--n-500);margin-bottom:3px">Score</div>
+            <div style="font-size:16px;font-weight:800;color:var(--error)">94</div>
+          </div>
+          <button class="btn btn-primary btn-sm">Contact</button>
+        </div>
+      </div>
+      <div class="lead-card" style="border-inline-start-color:var(--warning)">
+        <div class="lead-avatar" style="background:#FEF3C7;color:#92400E">SR</div>
+        <div class="lead-info">
+          <div class="lead-name">Sara Rivera <span class="badge badge-warning" style="margin-inline-start:6px">🌡 Warm</span></div>
+          <div class="lead-meta">sara@betainc.com · Beta Inc · Last contact: 1 week ago</div>
+        </div>
+        <div class="lead-actions">
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--n-500);margin-bottom:3px">Score</div>
+            <div style="font-size:16px;font-weight:800;color:var(--warning)">67</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Nurture</button>
+        </div>
+      </div>
+      <div class="lead-card" style="border-inline-start-color:var(--info)">
+        <div class="lead-avatar" style="background:#CFFAFE;color:#164E63">TK</div>
+        <div class="lead-info">
+          <div class="lead-name">Tom Kim <span class="badge badge-info" style="margin-inline-start:6px">❄ Cold</span></div>
+          <div class="lead-meta">tom@gamma.io · Gamma Labs · Last contact: 3 weeks ago</div>
+        </div>
+        <div class="lead-actions">
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--n-500);margin-bottom:3px">Score</div>
+            <div style="font-size:16px;font-weight:800;color:var(--info)">31</div>
+          </div>
+          <button class="btn btn-ghost btn-sm">Revive</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── BADGES ─────────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section">
+    <div class="ds-section-label">Components</div>
+    <h2 class="ds-section-title font-display">Badges & Status</h2>
+    <p class="ds-section-desc">Semantic status indicators for lead states, system states, and categorical labels.</p>
+    <div class="ds-flex">
+      <span class="badge badge-default">Default</span>
+      <span class="badge badge-brand">Brand</span>
+      <span class="badge badge-success">✓ Converted</span>
+      <span class="badge badge-warning">⚠ Warning</span>
+      <span class="badge badge-error">🔥 Hot Lead</span>
+      <span class="badge badge-info">ℹ Info</span>
+      <span class="badge badge-outline">Outline</span>
+    </div>
+    <div class="ds-flex" style="margin-top:16px">
+      <span class="badge badge-error">🔥 Hot</span>
+      <span class="badge badge-warning">🌡 Warm</span>
+      <span class="badge badge-info">❄ Cold</span>
+      <span class="badge badge-success">✓ Converted</span>
+      <span class="badge badge-default">○ Unresponsive</span>
+      <span class="badge badge-brand">◈ In Sequence</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FORMS ──────────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" id="forms">
+    <div class="ds-section-label">Components</div>
+    <h2 class="ds-section-title font-display">Forms & Inputs</h2>
+    <p class="ds-section-desc">Clean, accessible inputs with clear visual feedback for all states. Works seamlessly in RTL.</p>
+
+    <div class="ds-grid ds-grid-2" style="max-width:860px;gap:32px">
+      <div class="ds-grid" style="gap:20px">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" type="text" placeholder="John Smith" value="Sara Rivera">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="john@company.com" value="">
+          <span class="form-helper">We'll never share your email.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company</label>
+          <input class="form-input" type="text" placeholder="Acme Corporation">
+        </div>
+      </div>
+      <div class="ds-grid" style="gap:20px">
+        <div class="form-group">
+          <label class="form-label">Phone (error state)</label>
+          <input class="form-input error" type="tel" placeholder="+1 (555) 123-4567" value="not-a-phone">
+          <span class="form-error">⚠ Please enter a valid phone number</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lead Status</label>
+          <select class="form-input" style="cursor:pointer">
+            <option>🔥 Hot</option>
+            <option>🌡 Warm</option>
+            <option selected>❄ Cold</option>
+            <option>✓ Converted</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notes</label>
+          <textarea class="form-input" style="height:80px;padding-top:10px;resize:vertical" placeholder="Add context about this lead..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">Toggle Switches</div>
+    <div class="ds-flex">
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-thumb"></div></button>
+        <span style="font-size:14px;font-weight:500">AI Sequences Active</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="toggle" onclick="this.classList.toggle('on')"><div class="toggle-thumb"></div></button>
+        <span style="font-size:14px;font-weight:500;color:var(--n-500)">Email Notifications</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="toggle on" onclick="this.classList.toggle('on')"><div class="toggle-thumb"></div></button>
+        <span style="font-size:14px;font-weight:500">Voice AI Enabled</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── DATA TABLE ────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" id="data">
+    <div class="ds-section-label">Components</div>
+    <h2 class="ds-section-title font-display">Data Table</h2>
+    <p class="ds-section-desc">Primary data display for the leads dashboard. Sortable, filterable, and keyboard-navigable.</p>
+
+    <div class="ds-table-wrap fade-in" style="margin-bottom:32px">
+      <table class="ds-table">
+        <thead>
+          <tr>
+            <th><input type="checkbox" style="cursor:pointer"></th>
+            <th>Name ↕</th>
+            <th>Company</th>
+            <th>Status</th>
+            <th>Score ↓</th>
+            <th>Last Contact</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><div style="font-weight:600;color:var(--n-900)">John Smith</div><div style="font-size:12px;color:var(--n-500)">john@acme.com</div></td>
+            <td>Acme Corp</td>
+            <td><span class="badge badge-error">🔥 Hot</span></td>
+            <td><div style="font-weight:700;color:var(--error)">94</div></td>
+            <td style="color:var(--n-500);font-size:13px">2 days ago</td>
+            <td><button class="btn btn-primary btn-sm">Contact</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><div style="font-weight:600;color:var(--n-900)">Sara Rivera</div><div style="font-size:12px;color:var(--n-500)">sara@beta.com</div></td>
+            <td>Beta Inc</td>
+            <td><span class="badge badge-warning">🌡 Warm</span></td>
+            <td><div style="font-weight:700;color:var(--warning)">67</div></td>
+            <td style="color:var(--n-500);font-size:13px">1 week ago</td>
+            <td><button class="btn btn-secondary btn-sm">Nurture</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><div style="font-weight:600;color:var(--n-900)">Tom Kim</div><div style="font-size:12px;color:var(--n-500)">tom@gamma.io</div></td>
+            <td>Gamma Labs</td>
+            <td><span class="badge badge-info">❄ Cold</span></td>
+            <td><div style="font-weight:700;color:var(--info)">31</div></td>
+            <td style="color:var(--n-500);font-size:13px">3 weeks ago</td>
+            <td><button class="btn btn-ghost btn-sm">Revive</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><div style="font-weight:600;color:var(--n-900)">Mia Chen</div><div style="font-size:12px;color:var(--n-500)">mia@deltaco.com</div></td>
+            <td>Delta Co</td>
+            <td><span class="badge badge-success">✓ Converted</span></td>
+            <td><div style="font-weight:700;color:var(--success)">100</div></td>
+            <td style="color:var(--n-500);font-size:13px">Yesterday</td>
+            <td><button class="btn btn-ghost btn-sm">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Progress Bars -->
+    <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px">Progress / Score Bars</div>
+    <div class="ds-grid" style="gap:12px;max-width:480px">
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;font-size:13px;font-weight:500"><span>John Smith</span><span style="color:var(--error);font-weight:700">94%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:94%;background:linear-gradient(90deg,var(--error),#F87171)"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;font-size:13px;font-weight:500"><span>Sara Rivera</span><span style="color:var(--warning);font-weight:700">67%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:67%;background:linear-gradient(90deg,var(--warning),#FCD34D)"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;font-size:13px;font-weight:500"><span>Tom Kim</span><span style="color:var(--info);font-weight:700">31%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:31%;background:linear-gradient(90deg,var(--info),#67E8F9)"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SHADOWS ────────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section">
+    <div class="ds-section-label">Foundation</div>
+    <h2 class="ds-section-title font-display">Elevation & Shadows</h2>
+    <p class="ds-section-desc">Six levels of depth. Shadows communicate z-position and interactivity clearly.</p>
+    <div class="ds-grid ds-grid-4">
+      <div class="shadow-demo" style="box-shadow:0 1px 2px rgba(0,0,0,.05)">
+        <div style="font-weight:600;font-size:14px">XS</div>
+        <span>0 1px 2px .05</span>
+      </div>
+      <div class="shadow-demo" style="box-shadow:0 1px 3px rgba(0,0,0,.10),0 1px 2px rgba(0,0,0,.06)">
+        <div style="font-weight:600;font-size:14px">SM</div>
+        <span>shadow-sm</span>
+      </div>
+      <div class="shadow-demo" style="box-shadow:var(--sh-card)">
+        <div style="font-weight:600;font-size:14px">Card</div>
+        <span>default card</span>
+      </div>
+      <div class="shadow-demo" style="box-shadow:var(--sh-card-hover)">
+        <div style="font-weight:600;font-size:14px">Card Hover</div>
+        <span>on hover</span>
+      </div>
+      <div class="shadow-demo" style="box-shadow:0 20px 25px rgba(0,0,0,.10)">
+        <div style="font-weight:600;font-size:14px">XL</div>
+        <span>popovers</span>
+      </div>
+      <div class="shadow-demo" style="box-shadow:0 25px 50px rgba(0,0,0,.25)">
+        <div style="font-weight:600;font-size:14px">2XL</div>
+        <span>modals</span>
+      </div>
+      <div class="shadow-demo" style="box-shadow:var(--sh-brand)">
+        <div style="font-weight:600;font-size:14px;color:var(--brand-500)">Brand</div>
+        <span>primary buttons</span>
+      </div>
+      <div class="shadow-demo" style="box-shadow:var(--sh-brand-hover)">
+        <div style="font-weight:600;font-size:14px;color:var(--brand-400)">Brand Hover</div>
+        <span>button hover</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HEBREW RTL ─────────────────────────────────────────── -->
+<div class="ds-wrap">
+  <div class="ds-section" id="hebrew">
+    <div class="ds-section-label">Internationalization</div>
+    <h2 class="ds-section-title font-display">Hebrew / עברית (RTL)</h2>
+    <p class="ds-section-desc">Full bidirectional support. The complete design system mirrors seamlessly for Hebrew users — typography, layout, icons, and interactions.</p>
+
+    <div class="rtl-demo" dir="rtl">
+      <div class="rtl-inner">
+        <div class="rtl-badge">פלטפורמת ניהול לידים</div>
+        <div class="rtl-headline">הפוך לידים קפואים להכנסות</div>
+        <div class="rtl-sub">
+          בינה מלאכותית מחדשת קשר עם לקוחות פוטנציאליים באופן אוטומטי — כך שהצוות שלך מתמקד רק בקונים שמוכנים לסגור עסקה.
+        </div>
+        <div class="rtl-form-row">
+          <input class="rtl-input" type="email" placeholder="כתובת אימייל">
+          <input class="rtl-input" type="text" placeholder="שם החברה">
+          <button class="btn-rtl">התחל בחינם ←</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-grid ds-grid-2" style="margin-top:24px">
+      <!-- RTL Nav demo -->
+      <div class="card card-sm fade-in" style="overflow:hidden">
+        <div style="background:rgba(255,255,255,.96);border-bottom:1px solid var(--n-200);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;direction:rtl;font-family:'Heebo',sans-serif">
+          <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px">
+            <div class="ds-logo-mark" style="width:28px;height:28px;font-size:13px">LR</div>
+            LeadsReviver
+          </div>
+          <div style="display:flex;gap:16px;font-size:13px;font-weight:500">
+            <span style="color:var(--brand-500)">בית</span>
+            <span>תכונות</span>
+            <span>תמחור</span>
+            <span>אודות</span>
+          </div>
+          <button class="btn btn-primary btn-sm" style="font-family:'Heebo',sans-serif">התחל בחינם</button>
+        </div>
+        <div style="padding:16px 20px;font-size:12px;color:var(--n-500);text-align:center">RTL Navigation — logo right, links center, CTA left</div>
+      </div>
+
+      <!-- RTL Lead cards -->
+      <div class="card card-sm fade-in d-200" style="overflow:hidden">
+        <div style="padding:12px 16px;border-bottom:1px solid var(--n-100);font-size:12px;font-weight:600;color:var(--n-500)">RTL Lead Cards</div>
+        <div style="padding:8px">
+          <div class="lead-card" dir="rtl" style="font-family:'Heebo',sans-serif;border-inline-start-color:var(--error)">
+            <div class="lead-avatar" style="background:#FEE2E2;color:#991B1B">יש</div>
+            <div class="lead-info">
+              <div class="lead-name">יוסי שמיר <span class="badge badge-error" style="margin-inline-start:6px">🔥 חם</span></div>
+              <div class="lead-meta">yossi@company.co.il · אקמה בע"מ</div>
+            </div>
+            <div class="lead-actions">
+              <button class="btn btn-primary btn-sm" style="font-family:'Heebo',sans-serif">צור קשר</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hebrew font comparison -->
+    <div style="margin-top:24px;background:white;border-radius:var(--r-xl);padding:32px;box-shadow:var(--sh-card)">
+      <div style="font-size:12px;font-weight:600;color:var(--n-500);letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px">Hebrew Typography Scale</div>
+      <div style="display:grid;gap:16px;direction:rtl;font-family:'Heebo',sans-serif">
+        <div><div style="font-size:2.5rem;font-weight:800;line-height:1.2;color:var(--n-900)">הפוך לידים לעסקאות</div><div style="font-size:11px;color:var(--n-400);direction:ltr;text-align:left;margin-top:4px">Heebo 800 · Display · 40px</div></div>
+        <div><div style="font-size:1.5rem;font-weight:700;color:var(--n-900)">מנהל קמפיינים של לידים</div><div style="font-size:11px;color:var(--n-400);direction:ltr;text-align:left;margin-top:4px">Heebo 700 · H3 · 24px</div></div>
+        <div><div style="font-size:1rem;font-weight:400;color:var(--n-600);line-height:1.75">הפלטפורמה שלנו משתמשת בבינה מלאכותית מתקדמת כדי לזהות, לדרג ולחדש קשר עם לידים שהתקררו — תוך הפיכת הזדמנויות שאבדו לעסקאות ממשיות.</div><div style="font-size:11px;color:var(--n-400);direction:ltr;text-align:left;margin-top:4px">Heebo 400 · Body · 16px · line-height 1.75</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────── -->
+<div style="background:var(--brand-900);margin-top:0;padding:48px 0">
+  <div class="ds-wrap" style="text-align:center">
+    <div class="ds-logo" style="justify-content:center;color:white;margin-bottom:12px">
+      <div class="ds-logo-mark">LR</div>
+      LeadsReviver Design System
+    </div>
+    <div style="font-size:13px;color:rgba(255,255,255,.45);margin-bottom:16px">WW A.I Solutions · Version 1.0.0 · Next.js + Tailwind CSS</div>
+    <div class="ds-flex" style="justify-content:center">
+      <a href="tokens.css" style="color:var(--brand-300);font-size:12px;font-weight:600;text-decoration:none">tokens.css</a>
+      <span style="color:rgba(255,255,255,.2)">·</span>
+      <a href="tokens.json" style="color:var(--brand-300);font-size:12px;font-weight:600;text-decoration:none">tokens.json</a>
+      <span style="color:rgba(255,255,255,.2)">·</span>
+      <a href="style-guide.md" style="color:var(--brand-300);font-size:12px;font-weight:600;text-decoration:none">style-guide.md</a>
+      <span style="color:rgba(255,255,255,.2)">·</span>
+      <a href="components.md" style="color:var(--brand-300);font-size:12px;font-weight:600;text-decoration:none">components.md</a>
+      <span style="color:rgba(255,255,255,.2)">·</span>
+      <a href="rtl-hebrew.md" style="color:var(--brand-300);font-size:12px;font-weight:600;text-decoration:none">rtl-hebrew.md</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

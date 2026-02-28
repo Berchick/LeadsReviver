@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:wwaisolutions.com)",
+      "Bash(head:*)",
+      "Bash(cd:*)",
+      "Bash(cd C:/Work/AI/LeadsReviver/leadsreviver && npm run build 2>&1)",
+      "Bash(curl:*)",
+      "Bash(npm run:*)",
+      "Bash(netstat:*)",
+      "Bash(npx pageres-cli:*)"
+    ]
+  }
+}
