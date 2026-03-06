@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-export type Lang = 'en' | 'he' | 'pl';
+export type Lang = 'en' | 'he' | 'pl' | 'de';
 
 interface LangCtx {
   lang: Lang;
