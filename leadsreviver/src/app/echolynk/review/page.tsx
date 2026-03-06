@@ -145,6 +145,53 @@ const T = {
     speedBar:   (s: string) => <>Szybkość: 100 działań/dzień w <strong>~15 minut</strong> <span className="text-[#22C55E] font-semibold">{s}</span></>,
     speedHighlight: '≈33× szybciej niż ręczny follow-up',
   },
+  de: {
+    pageTitle: 'Jetzt ausprobieren —',
+    pageTitleAccent: 'Mensch in der Schleife (15 Min./Tag)',
+    pageSubtitle: '~100 KI-Vorschläge pro Tag mit klarer Begründung und voller Kontrolle.',
+    chips: [
+      { key: 'approve', label: 'Genehmigen & Weiter', desc: 'Sende die vorgeschlagene Nachricht und gehe zum nächsten Lead. Jede Genehmigung wird zu Trainingsdaten.', cls: 'bg-green-100 text-green-800 border-green-300' },
+      { key: 'edit',    label: 'Bearbeiten',          desc: 'Nachricht vor dem Senden ändern. Sichert Ihren Ton für zukünftige KI-Vorschläge.',                       cls: 'bg-blue-100 text-blue-800 border-blue-300'  },
+      { key: 'reject',  label: 'Ablehnen',            desc: 'Diesen Vorschlag überspringen. Lehrt die KI, was für Ihr Unternehmen "schlecht" aussieht.',              cls: 'bg-red-100 text-red-800 border-red-300'    },
+      { key: 'snooze',  label: 'Verschieben',         desc: 'Diesen Lead für später markieren — gerade falscher Zeitpunkt.',                                          cls: 'bg-yellow-100 text-yellow-800 border-yellow-300' },
+      { key: 'dnc',     label: 'Stopp / DNC',         desc: 'Zur Nicht-Kontaktieren-Liste hinzufügen. Compliance-Schutz — wird nie wieder kontaktiert.',             cls: 'bg-orange-100 text-orange-800 border-orange-300' },
+    ],
+    briefTitle: 'Tagesbericht',
+    progress: 'Fortschritt',
+    replies: 'Antworten',  repliesSub: 'Eingehende Antworten',  repliesDone: '0/6 erledigt',
+    plays:   'Aktionen',   playsSub:   'KI-Follow-ups',         playsDone:   '0/14 erledigt',
+    calls:   'Anrufe',     callsSub:   'Empfohlene Anrufe',     callsDone:   '0/4 erledigt',
+    leads: [
+      { id: 1, name: 'Jordan Lee',     service: 'Klimaanlage Reparatur',    zip: '75231', tag: 'Schneller Tipp' },
+      { id: 2, name: 'Hannah Brooks',  service: 'Klimaanlage Installation', zip: '75248', tag: 'Ungefährer Preis (1 Frage)' },
+      { id: 3, name: 'Noah Kim',       service: 'Klimaanlage Reparatur',    zip: '75006', tag: 'Zeitfenster wählen' },
+      { id: 4, name: 'Nora Patel',     service: 'HVAC-Wartung',             zip: '75243', tag: 'Reaktivierungsanstoß' },
+      { id: 5, name: 'Dylan Carter',   service: 'Klimaanlage Reparatur',    zip: '75001', tag: 'Den Kreis schließen' },
+      { id: 6, name: 'Mateo Garcia',   service: 'Wärmepumpen',              zip: '75254', tag: 'Neuer Ansatz: Finanzierung / Rabatte' },
+    ],
+    btnHistory:  'Verlauf',
+    btnCRM:      'Im CRM öffnen',
+    lastTouch:   'Letzter Kontakt: vor 18 Tagen',
+    whyTitle:    'Warum dieser als nächstes',
+    whyPoints: [
+      'Prüfen ob sie noch Hilfe möchten — entweder reaktivieren oder abschließen.',
+      'Lead ist 40 Tage alt; letzter Kontakt vor 18 Tagen; 0 Kontakte in 7 Tagen und 3 in 30.',
+      'Ein druckloser Reaktivierungs-Check passt besser als Detailpush nach langer Stille.',
+      'Der Entwurf ist ein einzeiliger Check-in mit einer "Alles gut"-Option — leicht zu beantworten.',
+    ],
+    channelLabel: 'Kanal',
+    playLabel:    'Aktion',
+    playName:     'Reaktivierungsanstoß',
+    messageLabel: 'Nachricht',
+    defaultMessage: 'Nora, wenn Sie noch Hilfe benötigen — möchten Sie das nächste freie Zeitfenster diese Woche?',
+    btnApprove: '✓ Genehmigen & Weiter',
+    btnReject:  '✕ Ablehnen',
+    btnSnooze:  '⏰ Verschieben',
+    btnDNC:     '⊗ Stopp / DNC',
+    gotIt:      'Verstanden',
+    speedBar:   (s: string) => <>Geschwindigkeit: 100 Aktionen/Tag in <strong>~15 Minuten</strong> <span className="text-[#22C55E] font-semibold">{s}</span></>,
+    speedHighlight: '≈33× schneller als manuelles Follow-up',
+  },
 } as const;
 
 export default function ReviewPage() {
@@ -153,7 +200,7 @@ export default function ReviewPage() {
 
   const [activeChipKey, setActiveChipKey] = useState<string | null>(null);
   const [selectedLead, setSelectedLead] = useState(4);
-  const [message, setMessage] = useState<Record<string, string>>({ en: T.en.defaultMessage, he: T.he.defaultMessage, pl: T.pl.defaultMessage });
+  const [message, setMessage] = useState<Record<string, string>>({ en: T.en.defaultMessage, he: T.he.defaultMessage, pl: T.pl.defaultMessage, de: T.de.defaultMessage });
 
   const activeChip = t.chips.find(c => c.key === activeChipKey);
 

@@ -175,6 +175,63 @@ const CONTENT = {
     },
     footer: '© 2024 EchoLynk — WW A.I Solutions',
   },
+  de: {
+    hero: {
+      badge: 'KI-gestützte Follow-Up-Intelligenz',
+      h1a: 'Schluss mit dem Raten.',
+      h1b: 'Jetzt konvertieren.',
+      sub: 'EchoLynk sagt Ihrem Team, wen sie kontaktieren, was sie sagen und warum — 100 Aktionen täglich in 15 Minuten.',
+      cta1: 'In Aktion sehen →',
+      cta2: 'Autopilot ansehen →',
+      proof: 'Break-even bei 6 Deals · $15k Pilot · Kundenspezifischer ROI',
+    },
+    intel: {
+      label: 'Die Intelligenzschicht',
+      h2: 'Jeden Tag beantwortet EchoLynk 4 Fragen für Ihr Team.',
+      cards: [
+        { num: '01', title: 'WER ALS NÄCHSTES', desc: 'Der Lead mit der höchsten Antwort- oder Buchungswahrscheinlichkeit, jeden Morgen neu eingestuft.' },
+        { num: '02', title: 'WELCHER PLAYBOOK', desc: 'Die exakte Follow-up-Routine, die für die Situation dieses Leads erstellt wurde.' },
+        { num: '03', title: 'WAS SCHREIBEN', desc: 'Ein versandbereiter Entwurf in Ihrer Stimme. Kein Template.' },
+        { num: '04', title: 'WARUM', desc: 'Klare Grundcodes: Verlauf, Timing, Risiko. Keine schwarze Box.' },
+      ],
+    },
+    process: {
+      label: 'Der Prozess',
+      h2a: 'Vom unübersichtlichen CRM zur Umsatzmaschine —',
+      h2b: 'in 90 Tagen.',
+      steps: [
+        { step: '[1]', title: 'Kalibrierung auf Ihre Erfolge', desc: 'Wir analysieren Ihre bisherigen Deals, bevor wir einen einzigen Lead anfassen. Ground Truth-Scoring kalibriert auf Ihre Ergebnisse, nicht auf generische Modelle.', badge: 'Woche 1', border: 'border-[#22C55E]/20', badgeCls: 'bg-[#22C55E]/10 text-[#22C55E]' },
+        { step: '[2]', title: '15-minütige tägliche Überprüfung', desc: 'Ihr Team prüft ~100 KI-Vorschläge. Genehmigen, bearbeiten, ablehnen. Jede Aktion trainiert die KI schneller auf Ihre Stimme.', badge: 'Tage 1–90', border: 'border-white/10', badgeCls: 'bg-white/5 text-white/50' },
+        { step: '[3]', title: 'Sprint zum Autopiloten', desc: 'Sobald die Genehmigungsrate ~90% erreicht, den Schalter umlegen. Autoplay führt die Playbooks aus. Sie erfassen Umsatz ohne tägliche Arbeit.', badge: 'Tag 90+', border: 'border-[#22C55E]/20', badgeCls: 'bg-[#22C55E]/10 text-[#22C55E]' },
+      ],
+    },
+    metrics: [
+      { value: '~21%', label: 'Antwortrate, erste Woche' },
+      { value: '~30%', label: 'Reaktivierungsrate' },
+      { value: '≈33×', label: 'Schneller als manuelles Follow-up' },
+      { value: '100%', label: 'ROI in Woche 1 (2 Deals à $5k)' },
+    ],
+    caseStudy: {
+      label: 'Aktuelle Ergebnisse',
+      h2a: 'Ruhende Leads →',
+      h2b: 'Echte Gespräche in Tagen.',
+      points: [
+        'Kalibrierung auf frühere Erfolge + Ergebnisse',
+        'Tägliche Konsistenz der besten nächsten Aktion',
+        'Human-in-the-Loop-Genehmigungen → schnelles Stimmenlernen',
+      ],
+      formulaIntro: 'Bei 25.000 ruhenden Leads:',
+      formula: ['25.000 Leads', '× 70% zustellbar', '× ~2% eskaliert', '× 35% Abschlussrate', '× $3.000 AOV'],
+      revenueLabel: 'Potenziell zurückgewonnener Umsatz',
+      revenueAmount: '≈ $367.500',
+    },
+    cta: {
+      h2: 'Geben Sie uns 15 Minuten täglich für 90 Tage.',
+      sub: 'Wir bauen Ihre Umsatz-Rückgewinnungsmaschine.',
+      btn: 'Pilot starten →',
+    },
+    footer: '© 2024 EchoLynk — WW A.I Solutions',
+  },
 } as const;
 
 export default function EchoLynkHome() {

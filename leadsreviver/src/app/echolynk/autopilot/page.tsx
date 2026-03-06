@@ -180,6 +180,56 @@ const T = {
     footer2: 'Autoplay = Powtarzalne zbieranie przychodów — bez codziennej pracy.',
     cta: 'Daj nam 15 minut/dzień przez 90 dni — zbudujemy Twój silnik odzyskiwania przychodów',
   },
+  de: {
+    h1: 'Sprint zum',
+    h1Accent: 'Autopiloten',
+    sub1: 'Sie starteten mit 15 Minuten pro Tag. Jetzt läuft Ihr Follow-up von selbst.',
+    sub2: (s: string) => <>Wenn Ihr Team konsequent <strong>~90% der Vorschläge</strong> genehmigt, ist es Zeit, <span className="text-[#22C55E] font-bold">{s}</span>. Autoplay übernimmt — sendet täglich automatisch die richtige Nachricht an den richtigen Lead.</>,
+    flipSwitch: 'den Schalter umzulegen',
+    onceOn: 'Sobald Autoplay aktiv ist:',
+    bullets: [
+      'Führt Ihre bewährten Playbooks automatisch aus — keine tägliche Überprüfung nötig',
+      'Erkennt Antworten, die einen Menschen erfordern, und eskaliert sie sofort',
+      'Protokolliert jedes Ergebnis, um kontinuierlich smarter zu werden',
+    ],
+    colPlaybook: 'Playbook',
+    colStatus: 'Status',
+    colSuggested: 'Vorgeschlagen (14T)',
+    colSucceeded: 'Erfolgreich (14T)',
+    colCorrected: 'Korrigiert (14T)',
+    colSince: 'Autoplay seit',
+    colSent: 'Auto-gesendet',
+    colActions: 'Aktionen',
+    edited: 'Bearbeitet',
+    err: 'Fehler',
+    streakSuffix: '-Tage-Serie',
+    btnEnable: 'Autoplay aktivieren',
+    btnPause: 'Pausieren',
+    btnResume: 'Fortsetzen',
+    btnLog: 'Log ansehen',
+    statusLabels: { Training: 'Training', Ready: 'Bereit', Autoplay: 'Autoplay', Paused: 'Pausiert' } as Record<Status, string>,
+    names: {
+      ballpark:     'Ungefährer Preis (1 Frage)',
+      socialProof:  'Social-Proof-Anstoß',
+      financing:    'Neuer Ansatz: Finanzierung / Rabatte',
+      blocker:      'Angebot: Was ist der Blocker?',
+      reactivation: 'Reaktivierungsanstoß',
+      repair:       'Reparatur vs. Austausch (2 Fragen)',
+      warranty:     'Garantie / Gewährleistung klären',
+    },
+    descs: {
+      salvage_ballpark:  'Rettung • ungefährer Preis',
+      salvage_trust:     'Rettung • Vertrauen aufbauen',
+      nurture_reactivate:'Pflege • reaktivieren',
+      estimate_blocker:  'Angebot • Blocker finden',
+      nurture_detail:    'Pflege • Details sammeln',
+      estimate_trust:    'Angebot • Vertrauen aufbauen',
+    },
+    footer1: 'Sobald Playbooks auf Autoplay laufen, wird Follow-up ein',
+    footer1b: 'kumulierendes Umsatzsystem',
+    footer2: 'Autoplay = Wiederholende Umsatzerfassung — ohne tägliche Arbeit.',
+    cta: 'Geben Sie uns 15 Min./Tag für 90 Tage — wir bauen Ihre Umsatz-Rückgewinnungsmaschine',
+  },
 } as const;
 
 const STATUS_STYLES: Record<Status, string> = {
@@ -194,7 +244,7 @@ export default function AutopilotPage() {
   const t = T[lang];
   const [rows, setRows] = useState<PlaybookRow[]>(INITIAL_ROWS);
 
-  const today = new Date().toLocaleDateString(lang === 'he' ? 'he-IL' : lang === 'pl' ? 'pl-PL' : 'en-US', {
+  const today = new Date().toLocaleDateString(lang === 'he' ? 'he-IL' : lang === 'pl' ? 'pl-PL' : lang === 'de' ? 'de-DE' : 'en-US', {
     month: 'short', day: 'numeric', year: 'numeric',
   });
 
